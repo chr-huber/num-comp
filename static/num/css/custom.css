@@ -1,0 +1,45 @@
+
+label.btn {
+    line-height: 0.7em;
+    background: none;
+}
+
+input[type=radio]:checked ~ label.btn {
+    background-color: #e6e6e6;
+}
+
+.center {
+    text-align: center;
+}
+
+
+/* =============================================== */
+/* Buttons */
+/* =============================================== */
+
+.btn-primary{
+	background-color: rgb(0, 51, 98, 1);
+    border-color: rgb(0, 51, 98, 1);
+}
+.btn-primary:hover{
+    background-color: rgb(0, 51, 98, 0.5);
+}
+.btn-primary:checked {
+    background-color: black;
+}
+
+.btn-light.light {
+    background-color: white;
+    border-color: white;
+    padding-left: 0;
+    padding-right: 0;
+}
+.btn-light.light:hover {
+    background-color: white;
+    border-color: white;
+}
+.btn-light.light:active {
+    background-color: white;
+    border-color: white;
+
+}

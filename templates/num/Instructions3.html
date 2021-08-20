@@ -1,0 +1,103 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+{% load humanize %}
+
+
+{#--- SCRIPTS --------------------------------------------------------------------------------------------------------#}
+
+{% block scripts %}
+    <script>
+        $(".openpanel1").on("click", function() {
+            $("#collapseOne").collapse('show');
+        });
+        $(".openpanel2").on("click", function() {
+            $("#collapseTwo").collapse('show');
+        });
+        $(".openpanel3").on("click", function() {
+            $("#collapseThree").collapse('show');
+        });
+        $(".closepanel").on("click", function() {
+            $("#panel3").collapse('hide');
+        });
+
+        /* ensure any open panels are closed before showing selected */
+        $('#accordion').on('show.bs.collapse', function () {
+            $('#accordion .in').collapse('hide');
+        });
+    </script>
+{% endblock %}
+
+
+{#--- STYLES ---------------------------------------------------------------------------------------------------------#}
+
+{% block styles %}
+    <link href="{% static 'global/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{#--- TITLE ----------------------------------------------------------------------------------------------------------#}
+
+{% block title %}
+    {% trans "Instructions - Stage 3" %}
+{% endblock %}
+
+
+{#--- CONTENT --------------------------------------------------------------------------------------------------------#}
+
+{% block content %}
+
+    <div id="accordion">
+
+        <div class="card card-transparent">
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <p align="justify">
+                        {% blocktrans trimmed %}
+                            As in stages 1 and 2, you will have 3 minutes' time in order to correctly solve as many
+                            addition exercises as possible.
+                            <br>
+                            However, before solving the exercises, you are now endowed with 100 points and asked to
+                            choose the portion of this amount (between 0 and 100 points, inclusive) that you wish to
+                            invest in a <i>Tournament payment</i> scheme (as in Stage 2). The rest of the 100 points
+                            will be invested in a <i>Piece-rate payment</i> scheme (as in Stage 1).
+                        {% endblocktrans %}
+                    </p>
+                    <hr>
+                    <p align="center">
+                        <b>{% trans "Payment" %}</b>
+                    </p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            The payments for each point invested in the options are as follows:
+                        {% endblocktrans %}
+                    </p>
+                    <ul>
+                        <li>
+                            {% blocktrans trimmed %}
+                                A. The piece-rate option pays <b>0.5 cents per invested point for each correct
+                                answer</b>.
+                            {% endblocktrans %}
+                        </li>
+                        <li>
+                            {% blocktrans trimmed %}
+                                B. The tournament option pays <b>1.5 cents per invested point for each correct
+                                answer</b> if you enter more correct answers in this stage than three of your group
+                                members in Stage 2 (Tournament payment). As a reminder: That is the stage that you have
+                                just completed. If you do not enter more correct answers in Stage 3 than three of your
+                                group members did in Stage 2, then you receive <b>no payment</b> for this stage. In case
+                                of a tie, the ranking among the members with equal performances is determined randomly.
+                            {% endblocktrans %}
+                        </li>
+                    </ul>
+                    <div style="text-align: right; padding-top: 5pt">
+                        <button class="btn btn-primary openpanel2">
+                            {% trans "Next" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,233 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+{% load humanize %}
+
+{#--- STYLES ---------------------------------------------------------------------------------------------------------#}
+
+{% block styles %}
+    <link href="{% static 'global/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{#--- TITLE ----------------------------------------------------------------------------------------------------------#}
+
+{% block title %}
+    {% trans "Allocation" %}
+{% endblock %}
+
+
+{#--- CONTENT --------------------------------------------------------------------------------------------------------#}
+
+{% block content %}
+
+    <div class="card">
+            <div class="card-body">
+                <p align="justify">
+                    {% blocktrans trimmed %}
+                        We now ask you to choose how many of the 100 points you would like to invest in option A
+                        (the <i>Piece- rate payment</i>) and how many in option B (the <i>Tournament payment</i>).
+                    {% endblocktrans %}
+                </p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-6">
+                            <p class="text-muted small" style="float:left; margin-bottom:5px;">
+                                {% blocktrans trimmed %}
+                                    all in <b>Piece-rate</b> payment<br> 0 points in A
+                                {% endblocktrans %}
+                            </p>
+                            <p class="text-muted small" style="float:right; text-align:right; margin-bottom:5px;">
+                                {% blocktrans trimmed %}
+                                    all in <b>Tournament</b> payment <br> 100 points B
+                                {% endblocktrans %}
+                            </p>
+                            <input id="rangeInput" class="form-control-range" name="compete" type="range" min="0" max="100" step="0.01" value="" onchange="updateTextInput(this.value);" required>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 10px">
+                        <div class="col-2"></div>
+                        <div class="col-4">
+                            <div class="input-group" style="width:70%; float:right;">
+                                <input class="form-control center" type="text" id="textInput2" min="0" max="100" step="0.01" onchange="updateRangeInput2(this.value); validateTextInput(); updateTextInput2(this.value)" value="" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">{% trans "points in A" %}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group" style="width:70%; float:left;">
+                                <input class="form-control center" type="text" id="textInput1" min="0" max="100" step="0.01" onchange="updateRangeInput1(this.value); validateTextInput(); updateTextInput1(this.value)" value="" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">{% trans "points in B" %}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="text-align: right; padding-top: 5pt">
+                    <button class="btn btn-primary openpanel3">
+                        {% trans "Confirm and start Stage 3" %}
+                    </button>
+                </div>
+            </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block scripts %}
+
+    <script>
+      function updateTextInput(val) {
+            document.getElementById('textInput1').value=val;
+            document.getElementById('textInput2').value=Math.round((100-val)*100)/100;
+          }
+      function updateTextInput1(val) {
+            document.getElementById('textInput2').value=Math.round((100-val)*100)/100;
+          }
+      function updateTextInput2(val) {
+            document.getElementById('textInput1').value=Math.round((100-val)*100)/100;
+          }
+      function updateRangeInput1(val) {
+            document.getElementById('rangeInput').value=val;
+          }
+      function updateRangeInput2(val) {
+            document.getElementById('rangeInput').value=Math.round((100-val)*100)/100;
+          }
+      function validateTextInput() {
+            if (parseFloat(document.getElementById('textInput1').value) < 0) {
+              document.getElementById('textInput1').value = 0;
+              document.getElementById('textInput2').value = 100;
+            }
+            if (parseFloat(document.getElementById('textInput1').value) > 100) {
+              document.getElementById('textInput1').value = 100;
+              document.getElementById('textInput2').value = 0;
+            }
+            if (parseFloat(document.getElementById('textInput2').value) < 0) {
+              document.getElementById('textInput2').value = 0;
+              document.getElementById('textInput1').value = 100;
+            }
+            if (parseFloat(document.getElementById('textInput2').value) > 100) {
+              document.getElementById('textInput2').value = 100;
+              document.getElementById('textInput1').value = 0;
+            }
+      }
+    </script>
+
+    <!-- Adjust slider looks -->
+    <style>
+        .myclass::-webkit-slider-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 24px !important;
+            width: 16px !important;
+            border-radius: 3px !important;
+            background: rgba(0, 51, 97, 1) !important;
+            cursor: pointer !important !important;
+            -webkit-appearance: none !important;
+            margin-top: -10px !important;
+        }
+        .myclass::-moz-range-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 24px !important;
+            width: 16px !important;
+            border-radius: 3px !important;
+            background: rgba(0, 51, 97, 1) !important;
+            cursor: pointer !important !important;
+            -webkit-appearance: none !important;
+            margin-top: -10px !important;
+        }
+        .myclass::-ms-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 24px !important;
+            width: 16px !important;
+            border-radius: 3px !important;
+            background: rgba(0, 51, 97, 1) !important;
+            cursor: pointer !important !important;
+            -webkit-appearance: none !important;
+            margin-top: -10px !important;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            padding: 18px 0;
+            margin: 0 0;
+            width: 100%;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            background: rgba(0, 51, 97, .6);
+            border-radius: 1.3px;
+            border: 0.2px solid #010101;
+        }
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            background: rgba(0, 51, 97, .6);
+            border-radius: 1.3px;
+            border: 0.2px solid #010101;
+        }
+        input[type=range]::-ms-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            background: rgba(0, 51, 97, .6);
+            border-radius: 1.3px;
+            border: 0.2px solid #010101;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            border: 0px;
+            height: 0px;
+            width: 0px;
+            border-radius: 0px;
+            -webkit-appearance: none;
+        }
+        input[type=range]::-moz-range-thumb {
+            border: 0px;
+            height: 0px;
+            width: 0px;
+            border-radius: 0px;
+            -webkit-appearance: none;
+        }
+        input[type=range]::-ms-thumb {
+            border: 0px;
+            height: 0px;
+            width: 0px;
+            border-radius: 0px;
+            -webkit-appearance: none;
+        }
+
+    </style>
+    <script>
+
+        $(document).ready(function () {
+            $('input[type=range]').on('input change', function () {
+                $('input[type=range]').addClass('myclass');
+            });
+
+        });
+    </script>
+
+{% endblock %}

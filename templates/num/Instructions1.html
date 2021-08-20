@@ -1,0 +1,72 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+{% load humanize %}
+
+
+{#--- SCRIPTS --------------------------------------------------------------------------------------------------------#}
+
+{% block scripts %}
+    <script>
+        $(".openpanel1").on("click", function() {
+            $("#collapseOne").collapse('show');
+        });
+        $(".openpanel2").on("click", function() {
+            $("#collapseTwo").collapse('show');
+        });
+        $(".openpanel3").on("click", function() {
+            $("#collapseThree").collapse('show');
+        });
+        $(".closepanel").on("click", function() {
+            $("#panel3").collapse('hide');
+        });
+
+        /* ensure any open panels are closed before showing selected */
+        $('#accordion').on('show.bs.collapse', function () {
+            $('#accordion .in').collapse('hide');
+        });
+    </script>
+{% endblock %}
+
+
+{#--- STYLES ---------------------------------------------------------------------------------------------------------#}
+
+{% block styles %}
+    <link href="{% static 'global/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{#--- TITLE ----------------------------------------------------------------------------------------------------------#}
+
+{% block title %}
+    {% trans "Instructions - Stage 1" %}
+{% endblock %}
+
+
+{#--- CONTENT --------------------------------------------------------------------------------------------------------#}
+
+{% block content %}
+
+    <div id="accordion">
+
+        <div class="card card-transparent">
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <p align="justify">
+                        {% blocktrans trimmed %}
+                            Stage 1 begins now. <br>
+                            You have 3 minutes' time to solve as many additions of five
+                            randomly selected two-digit numbers as possible.
+                        {% endblocktrans %}
+                    </p>
+                    <div style="text-align: right; padding-top: 5pt">
+                        <button class="btn btn-primary">
+                            {% trans "Start Stage 1" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

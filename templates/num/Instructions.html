@@ -1,0 +1,48 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+{% load humanize %}
+
+
+{#--- STYLES ---------------------------------------------------------------------------------------------------------#}
+
+{% block styles %}
+    <link href="{% static 'global/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{#--- TITLE ----------------------------------------------------------------------------------------------------------#}
+
+{% block title %}
+    {% trans "Instructions" %}
+{% endblock %}
+
+
+{#--- CONTENT --------------------------------------------------------------------------------------------------------#}
+
+{% block content %}
+
+    <div id="accordion">
+
+        <div class="card card-transparent">
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <p align="justify">
+                        {% blocktrans trimmed %}
+                            This is the first part of the experiment, which consists of three stages.
+                            One of the three stages will be randomly selected to determine your payment from this part.
+                            You will receive instructions for each of the three stages, one after the other.
+                        {% endblocktrans %}
+                    </p>
+                    <div style="text-align: right; padding-top: 5pt">
+                        <button class="btn btn-primary">
+                            {% trans "Next" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

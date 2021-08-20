@@ -1,0 +1,134 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+{% load humanize %}
+
+
+{#--- SCRIPTS --------------------------------------------------------------------------------------------------------#}
+
+{% block scripts %}
+    <script>
+        $(".openpanel1").on("click", function() {
+            $("#collapseOne").collapse('show');
+        });
+        $(".openpanel2").on("click", function() {
+            $("#collapseTwo").collapse('show');
+        });
+        $(".openpanel3").on("click", function() {
+            $("#collapseThree").collapse('show');
+        });
+        $(".closepanel").on("click", function() {
+            $("#panel3").collapse('hide');
+        });
+
+        /* ensure any open panels are closed before showing selected */
+        $('#accordion').on('show.bs.collapse', function () {
+            $('#accordion .in').collapse('hide');
+        });
+    </script>
+{% endblock %}
+
+
+{#--- STYLES ---------------------------------------------------------------------------------------------------------#}
+
+{% block styles %}
+    <link href="{% static 'global/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{#--- TITLE ----------------------------------------------------------------------------------------------------------#}
+
+{% block title %}
+    {% trans "Instructions - Stage 2" %}
+{% endblock %}
+
+
+{#--- CONTENT --------------------------------------------------------------------------------------------------------#}
+
+{% block content %}
+
+    <div id="accordion">
+
+        <div class="card card-transparent">
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <p align="justify">
+                        {% blocktrans trimmed %}
+                            As in Stage 1, you will have 3 minutes’ time in order to correctly solve as many addition
+                            exercises as possible. However, your payment in this stage depends on your performance
+                            relative to the performance of a group of participants.
+                        {% endblocktrans %}
+                    </p>
+                    <div style="text-align: right; padding-top: 5pt">
+                        <button type="button" class="btn btn-primary openpanel2">
+                            {% trans "Next" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card card-transparent">
+
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <p align="center">
+                        <b>{% trans "Allocation in groups" %}</b>
+                    </p>
+                    <p align="justify">
+                        {% blocktrans trimmed %}
+                            <b>Each group consists of 5 participants</b>, all of
+                            whom are men.
+                            Groups are randomly formed at the beginning of this stage and <b>each participant stays
+                            in the same group until the end of Part 1</b>. You will not find out the identity of the
+                            other participants in your group during or after the experiment, so that all decisions
+                            remain anonymous.
+                        {% endblocktrans %}
+                    </p>
+                    <div style="text-align: right; padding-top: 5pt">
+                        <button type="button" class="btn btn-primary openpanel3">
+                            {% trans "Next" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-transparent">
+
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    <p align="center">
+                        <b>{% trans "Payment" %}</b>
+                    </p>
+                    <p align="justify">
+                        {% blocktrans trimmed %}
+                            If Stage 2 is the stage selected for payment (in Part 1), then your payment depends on
+                            how many additions you have solved correctly in comparison with the other four participants
+                            in your group. The two group members who have entered the most correct answers are the two
+                            winners of the tournament. The two winners receive <b>€1.50 per correct answer</b> each,
+                            while the
+                            other three members do <b>not receive any payment</b>. In case of a tie, the ranking among
+                            the
+                            members with equal performances is determined randomly. From now on, we call this method of
+                            payment the <i>Tournament payment</i>.
+                        {% endblocktrans %}
+                    </p>
+                    <p align="justify">
+                        {% blocktrans trimmed %}
+                            You will not be informed about the outcome of the tournament until the end of the experiment.
+                        {% endblocktrans %}
+                    </p>
+                    <div style="text-align: right; padding-top: 5pt">
+                        <button class="btn btn-primary">
+                            {% trans "Start Stage 2" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

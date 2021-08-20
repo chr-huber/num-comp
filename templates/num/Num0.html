@@ -1,0 +1,150 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+
+{#--- STYLES ---------------------------------------------------------------------------------------------------------#}
+
+{% block styles %}
+    <link href="{% static 'global/custom.css' %}" rel="stylesheet"/>
+    <link href="{% static 'num/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{#--- TITLE ----------------------------------------------------------------------------------------------------------#}
+
+{% block title %}
+    {{ header }}
+{% endblock %}
+
+
+{#--- CONTENT --------------------------------------------------------------------------------------------------------#}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card card-header">
+            {% blocktrans trimmed %}
+                Solve as many of the following addition exercises correctly as possible.
+            {% endblocktrans %}
+        </div>
+        <div class="card-body" style="height: 220px;">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <td></td>
+                        <td class="center">
+                            <div class="btn btn-light" id="num1">
+                            </div>
+                        </td>
+                        <td><div class="btn btn-light light">+</div></td>
+                        <td class="center">
+                            <div class="btn btn-light" id="num2">
+                            </div>
+                        </td>
+                        <td><div class="btn btn-light light">+</div></td>
+                        <td class="center">
+                            <div class="btn btn-light" id="num3">
+                            </div>
+                        </td>
+                        <td><div class="btn btn-light light">+</div></td>
+                        <td class="center">
+                            <div class="btn btn-light" id="num4">
+                            </div>
+                        </td>
+                        <td><div class="btn btn-light light">+</div></td>
+                        <td class="center">
+                            <div class="btn btn-light" id="num5">
+                            </div>
+                        </td>
+                        <td><div class="btn btn-light light">=</div></td>
+                        <td class="center"></td>
+                        <td class="center" colspan="4">
+                            <input class="form-control" type=number min="0" max="999" id="sum_entered" style="font-weight: bold; width: 100px;">
+                        </td>
+                        <td></td>
+                        <td class="center" colspan="2">
+                            <button class="btn btn-primary" type="button" onclick="checkSum()">
+                                Confirm
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="12"></td>
+                        <td class="center">
+                            <div id="success" style="width: 100px;""></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <input name="trials" id="trials" type="number" readonly="readonly" style="visibility: hidden;">
+    <input name="correct" id="correct" type="number" readonly="readonly" style="visibility: hidden;">
+
+{% endblock %}
+
+
+{#--- SCRIPTS --------------------------------------------------------------------------------------------------------#}
+
+{% block scripts %}
+
+    <script>
+
+        var correct = 0;
+        var trials = 0;
+
+        function initNumbers(){
+            numb1 = Math.floor(Math.random() * 90) + 10;
+            numb2 = Math.floor(Math.random() * 90) + 10;
+            numb3 = Math.floor(Math.random() * 90) + 10;
+            numb4 = Math.floor(Math.random() * 90) + 10;
+            numb5 = Math.floor(Math.random() * 90) + 10;
+
+            document.getElementById("num1").innerHTML = numb1;
+            document.getElementById("num2").innerHTML = numb2;
+            document.getElementById("num3").innerHTML = numb3;
+            document.getElementById("num4").innerHTML = numb4;
+            document.getElementById("num5").innerHTML = numb5;
+
+            sum_correct = numb1+numb2+numb3+numb4+numb5;
+
+            document.getElementById("sum_entered").value = "";
+        }
+        initNumbers();
+
+        function checkSum(){
+            sum_entered = parseFloat(document.getElementById("sum_entered").value);
+            if (sum_entered === sum_correct) {
+                document.getElementById("success").className = "center alert alert-success";
+                document.getElementById("success").innerText = "{% trans "Correct!" %}";
+                setTimeout(function success() {
+                        document.getElementById("success").className = "center";
+                        document.getElementById("success").innerText = "";
+                    }, 1500);
+                initNumbers();
+                trials = trials + 1;
+                correct = correct + 1;
+                document.getElementById("trials").value = trials;
+                document.getElementById("correct").value = correct;
+            }
+            else if (isNaN(sum_entered)) {
+            }
+            else {
+                document.getElementById("success").className = "center alert alert-danger";
+                document.getElementById("success").innerText = "{% trans "Wrong!" %}";
+                setTimeout(function success() {
+                        document.getElementById("success").className = "center";
+                        document.getElementById("success").innerText = "";
+                    }, 1500);
+                initNumbers();
+                trials = trials + 1;
+                document.getElementById("trials").value = trials;
+                document.getElementById("correct").value = correct;
+            }
+        }
+
+    </script>
+
+
+{% endblock %}
