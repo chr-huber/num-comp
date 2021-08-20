@@ -26,7 +26,7 @@ Saccardo, S., Pietrasz, A., & Gneezy, U. (2018). On the size of the gender diffe
 
 
 class Constants(BaseConstants):
-    name_in_url = 'num'
+    name_in_url = 'num_comp'
     players_per_group = None
     num_rounds = 4
 
