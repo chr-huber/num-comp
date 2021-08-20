@@ -10,7 +10,8 @@ This oTree app contains a numeracy task to measure competitiveness with 3 stages
 ---
 
 References:
-Balafoutas, L., Fornwagner, H., & Sutter, M. (2018). Closing the gender gap in competitiveness through priming. Nature communications, 9(1), 1-6.
-Niederle, M., & Vesterlund, L. (2007). Do women shy away from competition? Do men compete too much?. The Quarterly Journal of Economics, 122(3), 1067-1101.
-Saccardo, S., Pietrasz, A., & Gneezy, U. (2018). On the size of the gender difference in competitiveness. Management Science, 64(4), 1541-1554.
+
+- Balafoutas, L., Fornwagner, H., & Sutter, M. (2018). Closing the gender gap in competitiveness through priming. Nature communications, 9(1), 1-6.
+- Niederle, M., & Vesterlund, L. (2007). Do women shy away from competition? Do men compete too much?. The Quarterly Journal of Economics, 122(3), 1067-1101.
+- Saccardo, S., Pietrasz, A., & Gneezy, U. (2018). On the size of the gender difference in competitiveness. Management Science, 64(4), 1541-1554.
 
